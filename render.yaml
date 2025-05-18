@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: mon-site
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: build
+    branch: master  # ou "main", selon ton repo
