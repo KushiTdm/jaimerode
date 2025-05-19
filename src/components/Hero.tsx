@@ -10,14 +10,14 @@ const Hero: React.FC = () => {
   const t = translations[language];
 
   return (
-    <section id="home" className="h-screen relative overflow-hidden flex items-center justify-center">
+    <section id="home" className="pt-24 h-screen relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 bg-gradient-to-b from-offwhite to-emerald/5 dark:from-charcoal dark:to-emerald-dark/20 z-0" />
       
       <div className="container mx-auto px-4 z-10 relative">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
             <motion.h1 
-              className="font-serif text-4xl md:text-6xl font-light text-emerald-dark dark:text-emerald hero-text mb-6"
+              className="font-serif text-4xl md:text-6xl font-light text-emerald-dark dark:text-emerald hero-text mb-6 mt-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}

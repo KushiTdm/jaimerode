@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode }) => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <Diamond className="h-7 w-7 text-emerald-dark dark:text-emerald" />
-          <span className="font-serif text-xl tracking-wider text-emerald-dark dark:text-emerald">EMERALD ELEGANCE</span>
+          <span className="font-serif text-xl tracking-wider text-emerald-dark dark:text-emerald font-normal ">J'AIME RÔDE</span>
         </div>
         
         <nav>

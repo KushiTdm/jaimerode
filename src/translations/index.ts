@@ -11,11 +11,11 @@ export const translations = {
       title: 'Emerald Hunter,',
       subtitle: 'Swat & Panjshir Treasures',
       description: 'I search for rare emeralds directly at the source — in the valleys of Swat (Pakistan) and Panjshir (Afghanistan). Each stone I select is unique, authentic, and rich in history.',
-      cta: 'Discover the Collection'
+      cta: 'ABOUT ME'
     },
     about: {
-      title: 'ABOUT THE',
-      subtitle: 'EMERALD HUNTER',
+      title: 'MY',
+      subtitle: 'WORK',
       description: 'More than a gemologist — I am a field explorer. I personally travel to the mountains of Pakistan and Afghanistan to find the most exceptional emeralds.',
       section: {
         title: 'At the Heart of the Mountains',
@@ -109,11 +109,11 @@ export const translations = {
       title: 'Chasseur d\'Émeraudes,',
       subtitle: 'Trésors du Swat & du Panjshir',
       description: 'Je pars sur le terrain, au cœur des vallées du Swat (Pakistan) et du Panjshir (Afghanistan), pour dénicher des émeraudes rares, authentiques et chargées d’histoire.',
-      cta: 'Voir la Collection'
+      cta: 'MON TRAVAIL'
     },
     about: {
-      title: 'À PROPOS DU',
-      subtitle: 'CHASSEUR',
+      title: 'MON',
+      subtitle: 'TRAVAIL',
       description: 'Plus qu’un gemmologue, je suis un chercheur de pierres sur le terrain. Je me rends personnellement dans les montagnes pour trouver des émeraudes d’exception.',
       section: {
         title: 'Au Cœur des Montagnes',

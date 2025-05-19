@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           <div className="mb-6 md:mb-0">
             <div className="flex items-center space-x-2">
               <Diamond className="h-6 w-6 text-gold" />
-              <span className="font-serif text-xl tracking-wider text-emerald">EMERALD ELEGANCE</span>
+              <span className="font-serif text-xl tracking-wider text-emerald">J'AIME RÔDE</span>
             </div>
             <p className="text-sm text-offwhite/60 mt-2 max-w-md">
               {t.footer.description}
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
             </div>
             
             <div className="text-offwhite/50 text-sm">
-              &copy; {new Date().getFullYear()} Emerald Elegance Research Institute. All rights reserved.
+              &copy; {new Date().getFullYear()} J'aime rôde Research Institute. All rights reserved.
             </div>
           </div>
         </div>
