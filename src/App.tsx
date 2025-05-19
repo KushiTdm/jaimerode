@@ -52,7 +52,7 @@ function MainApp() {
           <SocialIcons />
         </div>
         
-        <div className="fixed top-20 md:top-6 left-6 md:right-6 md:left-auto z-50 flex flex-col space-y-4">
+        <div className="fixed top-20 md:top-6 right-6 md:right-6 md:left-auto z-50 flex flex-col space-y-4">
           <button 
             onClick={toggleLanguage}
             className="p-2 rounded-full bg-offwhite dark:bg-charcoal shadow-md border border-gold/20 gem-cursor transition-all duration-300 hover:scale-110"
