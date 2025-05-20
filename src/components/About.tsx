@@ -63,14 +63,14 @@ const About: React.FC = () => {
             <div className="space-y-4">
               <div className="overflow-hidden rounded-lg h-48 md:h-64">
                 <img 
-                  src="https://images.pexels.com/photos/9436715/pexels-photo-9436715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                  src="/images/panjshirValley.jpeg" 
                   alt="Close-up of raw emerald" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg h-40 md:h-56">
                 <img 
-                  src="https://images.pexels.com/photos/6044257/pexels-photo-6044257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                  src="/images/swatMines.jpg" 
                   alt="Emerald jewelry" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -79,14 +79,14 @@ const About: React.FC = () => {
             <div className="space-y-4 mt-6">
               <div className="overflow-hidden rounded-lg h-40 md:h-56">
                 <img 
-                  src="https://images.pexels.com/photos/10017623/pexels-photo-10017623.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                  src="/images/panjshirMines.jpg" 
                   alt="Emerald mining" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
               <div className="overflow-hidden rounded-lg h-48 md:h-64">
                 <img 
-                  src="https://images.pexels.com/photos/9429853/pexels-photo-9429853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                  src="/images/panjshirvalley2.png" 
                   alt="Emerald under microscope" 
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />

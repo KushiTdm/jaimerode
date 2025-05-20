@@ -28,22 +28,22 @@ const Gallery: React.FC = () => {
       caption: "Panjshir emerald on velvet",
     },
     {
-      src: "https://images.pexels.com/photos/6044222/pexels-photo-6044222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      alt: "Modern emerald ring",
-      caption: "Modern emerald ring",
+      src: "/images/gem3.jpg",
+      alt: "emerald",
+      caption: " emerald ",
     },
     {
-      src: "https://images.pexels.com/photos/10046476/pexels-photo-10046476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      src: "/images/panjshirrough.jpg",
       alt: "Emerald under microscope",
       caption: "Emerald under microscope",
     },
     {
-      src: "https://images.pexels.com/photos/9429865/pexels-photo-9429865.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      src: "/images/RoughGems.jpg",
       alt: "Natural crystal formation",
       caption: "Natural crystal formation",
     },
     {
-      src: "https://images.pexels.com/photos/9436722/pexels-photo-9436722.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      src: "/images/roughgemslot.jpg",
       alt: "Emerald mining process",
       caption: "Emerald mining process",
     },
