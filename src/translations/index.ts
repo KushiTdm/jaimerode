@@ -61,7 +61,8 @@ export const translations = {
         name: 'Your Name',
         email: 'Your Email',
         message: 'Message',
-        submit: 'Send Message'
+        submit: 'Send Message',
+        loading: "Sending...",
       },
       location: {
         title: 'Based In',
@@ -159,7 +160,8 @@ export const translations = {
         name: 'Votre Nom',
         email: 'Votre Email',
         message: 'Message',
-        submit: 'Envoyer'
+        submit: 'Envoyer',
+        loading: "Envoi en cours...",
       },
       location: {
         title: 'Basé entre',

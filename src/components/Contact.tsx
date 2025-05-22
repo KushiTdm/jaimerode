@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
+import { useContactForm } from '../hooks/useContactForm';
 import { motion } from 'framer-motion';
 import { AtSign, MapPin, Phone, MessageSquare } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { translations } from '../translations';
 
+type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 const Contact: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  // Form state simple
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState<FormData>({ name: '', email: '', message: '' });
+  const { loading, responseMessage, sendForm } = useContactForm();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Ici tu peux ajouter une action (ex: API call)
-    alert(`${t.contact.form.submit}:\n${JSON.stringify(form, null, 2)}`);
+    await sendForm(form);
     setForm({ name: '', email: '', message: '' });
   };
 
@@ -43,7 +50,7 @@ const Contact: React.FC = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {/* Left: contact info */}
+          {/* Left side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -51,8 +58,8 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="space-y-8">
-              {/* Téléphone */}
-              <div className="flex items-start space-x-4">
+              {/* Phone */}
+              {/* <div className="flex items-start space-x-4">
                 <div className="text-gold p-2 rounded-full bg-offwhite dark:bg-charcoal border border-gold/20">
                   <Phone size={20} />
                 </div>
@@ -63,10 +70,10 @@ const Contact: React.FC = () => {
                     {t.contact.phone.hours}
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* Email */}
-              <div className="flex items-start space-x-4">
+              {/* <div className="flex items-start space-x-4">
                 <div className="text-gold p-2 rounded-full bg-offwhite dark:bg-charcoal border border-gold/20">
                   <AtSign size={20} />
                 </div>
@@ -76,7 +83,7 @@ const Contact: React.FC = () => {
                     <p key={i} className="text-charcoal/80 dark:text-offwhite/80">{address}</p>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Telegram */}
               <div className="flex items-start space-x-4">
@@ -87,7 +94,7 @@ const Contact: React.FC = () => {
                   <h3 className="font-serif text-lg mb-2 text-emerald-dark dark:text-emerald">{t.contact.telegram.title}</h3>
                   <p className="text-charcoal/80 dark:text-offwhite/80 mb-3">{t.contact.telegram.description}</p>
                   <a
-                    href="https://t.me/emeraldelegance"
+                    href="https://t.me/Emeraude_bot"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 px-4 py-2 bg-emerald-dark text-white hover:bg-gold transition-colors rounded-md font-sans text-sm gem-cursor"
@@ -99,17 +106,14 @@ const Contact: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right: contact form */}
+          {/* Right side: form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <form
-              onSubmit={handleSubmit}
-              className="max-w-md mx-auto space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
               <input
                 type="text"
                 name="name"
@@ -117,6 +121,7 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 placeholder={t.contact.form.name}
                 required
+                aria-label="Name"
                 className="w-full px-4 py-3 rounded border border-charcoal/30 dark:border-offwhite/30 bg-white dark:bg-charcoal text-charcoal dark:text-offwhite placeholder-charcoal/50 dark:placeholder-offwhite/50 focus:outline-none focus:ring-2 focus:ring-emerald"
               />
               <input
@@ -126,6 +131,7 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 placeholder={t.contact.form.email}
                 required
+                aria-label="Email"
                 className="w-full px-4 py-3 rounded border border-charcoal/30 dark:border-offwhite/30 bg-white dark:bg-charcoal text-charcoal dark:text-offwhite placeholder-charcoal/50 dark:placeholder-offwhite/50 focus:outline-none focus:ring-2 focus:ring-emerald"
               />
               <textarea
@@ -135,14 +141,22 @@ const Contact: React.FC = () => {
                 placeholder={t.contact.form.message}
                 required
                 rows={5}
+                aria-label="Message"
                 className="w-full px-4 py-3 rounded border border-charcoal/30 dark:border-offwhite/30 bg-white dark:bg-charcoal text-charcoal dark:text-offwhite placeholder-charcoal/50 dark:placeholder-offwhite/50 focus:outline-none focus:ring-2 focus:ring-emerald resize-none"
               />
               <button
                 type="submit"
-                className="w-full bg-emerald-dark text-white py-3 rounded hover:bg-gold transition-colors font-semibold"
+                disabled={loading}
+                className="w-full bg-emerald-dark text-white py-3 rounded hover:bg-gold transition-colors font-semibold disabled:opacity-60"
               >
-                {t.contact.form.submit}
+                {loading ? t.contact.form.loading : t.contact.form.submit}
               </button>
+
+              {responseMessage && (
+                <p className="text-center mt-4 text-sm text-emerald-dark dark:text-emerald">
+                  {responseMessage}
+                </p>
+              )}
             </form>
           </motion.div>
         </div>

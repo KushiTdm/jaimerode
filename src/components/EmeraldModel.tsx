@@ -31,11 +31,11 @@ const EmeraldCut = () => {
   // Paramètres d'extrusion améliorés pour les facettes
   const extrudeSettings = {
     steps: 2,
-    depth: 0.6, // Profondeur légèrement augmentée
+    depth: 0.4, // Profondeur légèrement augmentée
     bevelEnabled: true,
     bevelThickness: 0.15,
     bevelSize: 0.2,
-    bevelSegments: 4, // Plus de segments pour des facettes plus nettes
+    bevelSegments: 5, // Plus de segments pour des facettes plus nettes
   };
 
   const geometry = new ExtrudeGeometry(shape, extrudeSettings);
