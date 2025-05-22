@@ -8,23 +8,27 @@ export function useNewsletterForm() {
 
   const submit = async () => {
   try {
+    setLoading(true); // ← important
     const res = await fetch('/api/newsletter-subscribe', {
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'X-Request-Source': 'web-form'
       },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         email: email.trim(),
-        _timestamp: Date.now() // Anti-cache
+        _timestamp: Date.now()
       })
     });
+
+    console.log('Status:', res.status); // ← log utile
+    const text = await res.text();
+    console.log('Response text:', text); // ← inspecter ici
 
     if (res.status === 204) {
       throw new Error('204 No Content');
     }
 
-    const text = await res.text();
     if (!text) {
       throw new Error('Empty response');
     }
@@ -35,11 +39,14 @@ export function useNewsletterForm() {
     }
 
     setStatus('success');
-  } catch (err) {
+  } catch (err: any) {
     console.error('API Error:', err.message);
     setStatus('error');
+  } finally {
+    setLoading(false);
   }
 };
+
 
   return { email, setEmail, loading, status, submit };
 }
