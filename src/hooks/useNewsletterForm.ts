@@ -13,30 +13,46 @@ export function useNewsletterForm() {
   }
 
   setLoading(true);
+  setStatus(null);
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000); // Timeout après 10s
+
     const res = await fetch('/api/newsletter-subscribe', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email.trim() })
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ email: email.trim() }),
+      signal: controller.signal
     });
 
-    if (!res.ok) {
-      const text = await res.text();
-      throw new Error(text || 'Erreur serveur');
+    clearTimeout(timeout);
+
+    // Vérifiez d'abord si la réponse est vide
+    const responseText = await res.text();
+    if (!responseText) {
+      throw new Error('Empty response from server');
     }
 
-    const data = await res.json();
-    
-    if (data.success) {
-      setStatus('success');
-      setEmail('');
-    } else {
-      setStatus(data.message?.includes('déjà') ? 'duplicate' : 'error');
+    // Essayez de parser le JSON seulement si la réponse n'est pas vide
+    const data = JSON.parse(responseText);
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || 'Request failed');
     }
+
+    setStatus('success');
+    setEmail('');
   } catch (err) {
-    console.error('Erreur:', err);
-    setStatus('error');
+    console.error('API Error:', err);
+    setStatus(
+      err.message.includes('déjà') || err.message.includes('déjà') 
+        ? 'duplicate' 
+        : 'error'
+    );
   } finally {
     setLoading(false);
   }
