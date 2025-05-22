@@ -3,12 +3,20 @@ import { motion } from 'framer-motion';
 import { Diamond } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';  // import du contexte
 import { translations } from '../translations';             // import des traductions
+import { useNewsletterForm } from '../hooks/useNewsletterForm'; // 👈 hook importé
 
 
 const Footer: React.FC = () => {
-
   const { language } = useLanguage();
   const t = translations[language];
+
+  const {
+    email,
+    setEmail,
+    loading,
+    status,
+    submit
+  } = useNewsletterForm(); // 👈 hook utilisé
     
   return (
     <footer className="bg-charcoal dark:bg-black text-offwhite py-12">
@@ -26,16 +34,35 @@ const Footer: React.FC = () => {
           
           <div className="text-center md:text-right">
             <h3 className="font-serif text-lg mb-3 text-emerald">{t.footer.newsletter.title}</h3>
+          <div className="flex flex-col items-start md:items-end">
             <div className="flex">
               <input 
                 type="email" 
                 placeholder={t.footer.newsletter.placeholder}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="p-2 bg-white/10 border border-offwhite/20 rounded-l-md focus:outline-none focus:ring-1 focus:ring-gold/50 text-sm w-48 md:w-64"
               />
-              <button className="px-4 py-2 bg-gold text-charcoal rounded-r-md font-sans uppercase tracking-widest text-xs gem-cursor hover:bg-gold-light transition-colors">
-                {t.footer.newsletter.submit}
+              <button 
+                onClick={submit}
+                disabled={loading}
+                className="px-4 py-2 bg-gold text-charcoal rounded-r-md font-sans uppercase tracking-widest text-xs gem-cursor hover:bg-gold-light transition-colors disabled:opacity-50"
+              >
+                {loading ? '...' : t.footer.newsletter.submit}
               </button>
             </div>
+
+            {status === 'success' && (
+              <p className="text-emerald text-xs mt-2">Merci pour votre inscription !</p>
+            )}
+            {status === 'duplicate' && (
+              <p className="text-yellow-400 text-xs mt-2">Adresse déjà enregistrée.</p>
+            )}
+            {status === 'error' && (
+              <p className="text-red-500 text-xs mt-2">Erreur. Veuillez réessayer.</p>
+            )}
+          </div>
+
           </div>
         </div>
         
