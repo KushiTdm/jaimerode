@@ -18,9 +18,13 @@ export function useNewsletterForm() {
     try {
       const res = await fetch('https://n8n-hx5y.onrender.com/webhook/newsletter-subscribe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors', // Explicitement activer CORS
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
         body: JSON.stringify({ email }),
-      });
+        });
 
       const data = await res.json();
 
