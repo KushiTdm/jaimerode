@@ -8,19 +8,24 @@ export default defineConfig({
     exclude: ['lucide-react'],
   },
   server: {
-    proxy: {
-      '/api': {
-        target: 'https://n8n-hx5y.onrender.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        secure: false,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-        }
+  proxy: {
+    '/api': {
+      target: 'https://n8n-hx5y.onrender.com',
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/api/, '/webhook'),
+      configure: (proxy) => {
+        proxy.on('proxyReq', (proxyReq) => {
+          proxyReq.setHeader('X-Forwarded-Host', 'jaimerode.onrender.com');
+        });
+        proxy.on('proxyRes', (proxyRes) => {
+          // Force le Content-Type si vide
+          if (!proxyRes.headers['content-type']) {
+            proxyRes.headers['content-type'] = 'application/json';
+          }
+        });
       }
     }
-  },
+  }
+}
  
 });
