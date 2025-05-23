@@ -16,7 +16,7 @@ export function useNewsletterForm() {
   setStatus(null);
 
   try {
-    const res = await fetch('/api/newsletter-subscribe', {
+    const res = await fetch('https://n8n-hx5y.onrender.com/webhook/newsletter-subscribe', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
