@@ -24,8 +24,24 @@ export function useNewsletterForm() {
   body: JSON.stringify({ email }),
 });
 
-const text = await res.text();
-console.log('RESPONSE =', text);
+if (!res.ok) {
+  setStatus('error');
+  return;
+}
+
+const data = await res.json();
+console.log('RESPONSE =', data);
+
+// N8N doit renvoyer un objet du style : { success: true, status: 'success' | 'duplicate' }
+
+if (data.status === 'duplicate') {
+  setStatus('duplicate');
+} else if (data.success) {
+  setStatus('success');
+} else {
+  setStatus('error');
+}
+
 
   } catch (error: unknown) { // Ici on type explicitement error comme unknown
     let errorMessage = 'Erreur inconnue';
