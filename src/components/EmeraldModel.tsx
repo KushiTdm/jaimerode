@@ -44,7 +44,7 @@ const EmeraldCut = () => {
     <group ref={group}>
       <mesh geometry={geometry}>
         <MeshTransmissionMaterial
-          color="#008f6b" // 🌿 Vert émeraude plus sombre
+          color="#00ffb3"
           transmission={0.95}
           roughness={0.03}
           thickness={0.8}
@@ -53,7 +53,7 @@ const EmeraldCut = () => {
           anisotropy={0.4}
           clearcoat={1}
           clearcoatRoughness={0.03}
-          specularColor="#aaffee" // reflets subtils bleutés
+          specularColor="#aaffff"
           envMapIntensity={5}
         />
       </mesh>
