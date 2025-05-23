@@ -7,40 +7,37 @@ export function useNewsletterForm() {
   const [status, setStatus] = useState<null | 'success' | 'error' | 'duplicate'>(null);
 
   const submit = async () => {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setStatus('error');
+    return;
+  }
+
+  setLoading(true);
+  setStatus(null);
+
   try {
-    setLoading(true); // ← important
     const res = await fetch('/api/newsletter-subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Request-Source': 'web-form'
-      },
-      body: JSON.stringify({
-        email: email.trim(),
-        _timestamp: Date.now()
-      })
-    });
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ email }),
+});
 
-    console.log('Status:', res.status); // ← log utile
-    const text = await res.text();
-    console.log('Response text:', text); // ← inspecter ici
+const text = await res.text();
+console.log('RESPONSE =', text);
 
-    if (res.status === 204) {
-      throw new Error('204 No Content');
+  } catch (error: unknown) { // Ici on type explicitement error comme unknown
+    let errorMessage = 'Erreur inconnue';
+    
+    // Vérification type-safe de l'erreur
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === 'string') {
+      errorMessage = error;
     }
 
-    if (!text) {
-      throw new Error('Empty response');
-    }
-
-    const data = JSON.parse(text);
-    if (!data?.success) {
-      throw new Error(data?.message || 'Invalid response');
-    }
-
-    setStatus('success');
-  } catch (err: any) {
-    console.error('API Error:', err.message);
+    console.error('Erreur de soumission:', errorMessage);
     setStatus('error');
   } finally {
     setLoading(false);

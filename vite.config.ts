@@ -9,23 +9,14 @@ export default defineConfig({
   },
   server: {
   proxy: {
-    '/api': {
+    '/api/newsletter-subscribe': {
       target: 'https://n8n-hx5y.onrender.com',
       changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/api/, '/webhook'),
-      configure: (proxy) => {
-        proxy.on('proxyReq', (proxyReq) => {
-          proxyReq.setHeader('X-Forwarded-Host', 'jaimerode.onrender.com');
-        });
-        proxy.on('proxyRes', (proxyRes) => {
-          // Force le Content-Type si vide
-          if (!proxyRes.headers['content-type']) {
-            proxyRes.headers['content-type'] = 'application/json';
-          }
-        });
-      }
+      secure: false,
+      rewrite: (path) => path.replace(/^\/api\/newsletter-subscribe/, '/webhook/newsletter-subscribe'),
     }
   }
 }
+
  
 });
