@@ -18,7 +18,7 @@ const Gallery: React.FC = () => {
 
   const galleryImages: GalleryImage[] = [
     {
-      src: "/images/emerald.png",
+      src: "/images/panjshirER.jpg",
       alt: "Raw emerald specimen",
       caption: "Raw emerald specimen",
     },
